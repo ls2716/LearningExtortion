@@ -1,0 +1,34 @@
+environment:
+  A: [1., 1.]
+  C: [1., 1.]
+  mu_0 : 0.25
+  sigma: 0.
+  a_0: -1.
+  N: 2
+price_bounds: [1.0, 2.8]
+optimization_cases: 
+  - name: sw_uts
+    agent:
+      type: SW_UTS
+      params:
+        n_actions: 51
+        n_neighbors: 2
+        sliding_window: 50
+        std: 0.01
+    delay: 0.75
+    n_competitions: 10
+    T: 500
+    skip_steps: 400
+    learning_agent_initial_price: 1.3
+    extortion_agent_initial_price: 1.3
+extortion_agent:
+  type: ExtortionAgent
+  theoretical_mapping_path: ../experiment_theory_strategies/unimodal_extortion_mapping.txt
+  params:
+    map_type: monotone_equispaced
+    n_params: 14
+optimization:
+  maxfevals: 500
+  seed: 42
+  sigma0: 0.8
+  param_bounds: [0., 6.]

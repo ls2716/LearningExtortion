@@ -1,0 +1,32 @@
+environment:
+  A: [1., 1.]
+  C: [1., 1.]
+  mu_0 : 0.25
+  sigma: 0.
+  a_0: -1.
+  N: 2
+price_bounds: [1.0, 2.8]
+optimization_cases: 
+  - name: self_play
+    agent:
+      type: ExtortionAgentSelfPlay
+      params:
+        dummy: true
+    delay: 0.5
+    n_competitions: 1
+    T: 10
+    skip_steps: 5
+    learning_agent_initial_price: 1.5
+    extortion_agent_initial_price: 1.5
+extortion_agent:
+  type: ExtortionAgent
+  params:
+    map_type: custom
+    map_params_path: "custom_parameters/tit_for_tat_params.txt"
+optimization:
+  maxfevals: 500
+  seed: 42
+  sigma0: 0.8
+  param_bounds: [0., 6.]
+
+

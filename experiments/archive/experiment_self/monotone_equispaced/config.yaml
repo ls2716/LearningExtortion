@@ -1,0 +1,33 @@
+environment:
+  A: [1., 1.]
+  C: [1., 1.]
+  mu_0 : 0.25
+  sigma: 0.
+  a_0: -1.
+  N: 2
+competition:
+  type: "naive"
+  T: 500
+  skip_steps: 0
+  learning_agent_initial_price: 1.5
+  extortion_agent_initial_price: 1.5
+  delay: 0.0
+  n_competitions: 10
+  price_bounds: [1.0, 2.8]
+learning_agent:
+  type: EpsGreedyBandit
+  params:
+    epsilon: 0.5
+    n_actions: 21
+    decay: 0.99
+extortion_agent:
+  type: ExtortionAgent
+  params:
+    map_type: monotone_equispaced
+    n_params: 14
+optimization:
+  maxfevals: 100
+  seed: 42
+  sigma0: 0.8
+  param_bounds: [0., 6.]
+

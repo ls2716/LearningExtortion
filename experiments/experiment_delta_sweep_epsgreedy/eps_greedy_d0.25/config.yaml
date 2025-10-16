@@ -1,0 +1,35 @@
+environment:
+  A: [1., 1.]
+  C: [1., 1.]
+  mu_0 : 0.25
+  sigma: 0.
+  a_0: -1.
+  N: 2
+price_bounds: [1.0, 2.8]
+optimization_cases: 
+  - name: eps_greedy
+    agent:
+      type: EpsGreedyBandit
+      params:
+        epsilon: 0.5
+        n_actions: 21
+        decay: 0.995
+    delay: 0.25
+    n_competitions: 10
+    T: 1000
+    skip_steps: 800
+    learning_agent_initial_price: 1.5
+    extortion_agent_initial_price: 1.5
+extortion_agent:
+  type: ExtortionAgent
+  theoretical_mapping_path: ../experiment_theory_strategies/extortion_mapping.txt
+  params:
+    map_type: monotone_equispaced
+    n_params: 14
+optimization:
+  maxfevals: 200
+  seed: 42
+  sigma0: 0.8
+  param_bounds: [0., 6.]
+
+

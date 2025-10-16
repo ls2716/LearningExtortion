@@ -1,0 +1,37 @@
+environment:
+  A: [1., 1.]
+  C: [1., 1.]
+  mu_0 : 0.5
+  sigma: 0.
+  a_0: -1.
+  N: 2
+competition:
+  type: "naive"
+  T: 500
+  skip_steps: 250
+  learning_agent_initial_price: 1.5
+  extortion_agent_initial_price: 1.5
+  delay: 0.0
+  n_competitions: 10
+  price_bounds: [1.0, 2.8]
+  "skip_step_sum": 0
+learning_agent:
+  type: Logistic2D
+  params:
+    n_actions: 51
+    epsilon: 0.05
+    model_params:
+      param_bounds:
+        A: [[0.5, 1.5], [0.5, 1.5]]
+        mu: [0.05, 0.5]
+        BD: [0.05, 1.5]
+      C: [1., 1.]
+extortion_agent:
+  map_type: monotone_equispaced
+  n_params: 14
+optimization:
+  maxfevals: 1000
+  seed: 42
+  sigma0: 0.8
+  param_bounds: [0., 6.]
+

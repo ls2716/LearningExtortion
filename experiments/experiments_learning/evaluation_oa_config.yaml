@@ -1,0 +1,46 @@
+environment:
+  A: [1., 1.]
+  C: [1., 1.]
+  mu_0 : 0.25
+  sigma: 0.
+  a_0: -1.
+  N: 2
+  nash_price: 1.473
+  nash_reward: 0.223
+  pareto_price: 1.925
+  pareto_reward: 0.337
+price_bounds: [1.0, 2.8]
+optimization_cases: 
+  - name: modelbased_opponentaware
+    agent:
+      type: Logistic2D
+      params:
+        epsilon: 0.5
+        decay: 0.99
+        n_actions: 101
+        action_bounds: [1.0, 2.8]
+        model_params:
+          C: [1., 1.]
+          a_0: -1.
+          param_bounds:
+            A: [[0.5, 0.5], [2., 2.0]]
+            mu: [0.1, 0.4]
+            BD: [0.2, 2.0]
+    delay: 0.0
+    n_competitions: 5
+    T: 500
+    skip_steps: 400
+    learning_agent_initial_price: 1.3
+    extortion_agent_initial_price: 1.3
+extortion_agent:
+  type: ExtortionAgent
+  params:
+    map_type: monotone_equispaced
+    n_params: 14
+optimization:
+  maxfevals: 500
+  seed: 42
+  sigma0: 0.8
+  param_bounds: [0., 6.]
+
+
