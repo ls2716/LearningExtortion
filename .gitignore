@@ -5,3 +5,6 @@ __pycache__/
 *.txt
 *.pkl
 *.json
+
+# Add exceptions below
+!requirements.txt
