@@ -1,4 +1,4 @@
-# Learning to Extort Rational Opponents in Pricing Duopoly
+# Learning to Extort Rational Opponents in Pricing Duopolies
 
 
 The code supports the research presented in Chapter 4 of the PhD thesis:  
