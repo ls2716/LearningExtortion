@@ -12,7 +12,7 @@ optimization_cases:
       type: ExtortionAgent
       params:
         map_type: custom
-        map_params_path: "../experiment_theory_strategies/best_response_params.txt"
+        map_params_path: "../experiment_theory_strategies/outputs/best_response/best_response_params.txt"
     delay: 0.0
     n_competitions: 1
     T: 50
@@ -50,7 +50,7 @@ optimization_cases:
     penalty_slack: 0.00
 extortion_agent:
   type: ExtortionAgent
-  theoretical_mapping_path: "../experiment_theory_strategies/tit_for_tat_up_prices.txt"
+  theoretical_mapping_path: "../experiment_theory_strategies/outputs/tit_for_tat/tit_for_tat_up_prices.txt"
   theoretical_mapping_name: "Tit-For-Tat"
   nash_price: 1.473
   pareto_price: 1.925

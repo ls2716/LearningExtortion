@@ -1,8 +1,12 @@
-"""Find the extortion strategy that extorts the learning agent to cooperate."""
+"""Find the best response mapping."""
 
+import os
 import numpy as np
-
 import matplotlib.pyplot as plt
+
+# Create output directory
+OUTPUT_DIR = "outputs/best_response"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
 def get_rewards(prices, A, C, mu, a_0):
@@ -11,9 +15,9 @@ def get_rewards(prices, A, C, mu, a_0):
 
     Args:
         prices (np.ndarray): Array of shape (n, 2) where each row is (p_f, p_l).
-        A (np.ndarray): Demand intercepts for both agents.
+        A (np.ndarray): Quality coefficients for both agents.
         C (np.ndarray): Cost coefficients for both agents.
-        mu (float): Scale parameter for the logit model.
+        mu (float): Substitution coefficient for the logit model.
         a_0 (float): Outside option utility.
     Returns:
         np.ndarray: Array of shape (n, 2) where each row is (r_f, r_l).
@@ -31,17 +35,17 @@ def compute_best_response(A, C, p_opponent, price_bounds, mu, a_0, num_points=40
     Compute the best response price for the learning agent given the fixed price of the extortion agent.
 
     Args:
-        a_f (float): Demand intercept for the extortion agent.
-        a_l (float): Demand intercept for the learning agent.
-        p_f (float): Fixed price of the extortion agent.
-        price_bounds (tuple): Bounds for the learning agent's price.
-        mu (float): Scale parameter for the logit model.
-        a_0 (float): Outside option utility.
-        num_points (int): Number of points to evaluate in the price range.
+        A: Quality coefficients for both agents.
+        C: Cost coefficients for both agents.
+        p_opponent: Fixed price of the opponent.
+        price_bounds (tuple): Bounds for the agent's price search.
+        mu: Substitution coefficient.
+        a_0: Outside option utility.
+        num_points: Number of points to evaluate in the price range.
 
     Returns:
-        float: Best response price for the learning agent.
-        float: Maximum reward for the learning agent.
+        float: Best response price.
+        float: Maximum reward.
     """
     prices = np.linspace(price_bounds[0], price_bounds[1], num_points)
     prices_all = np.vstack((prices, np.full_like(prices, p_opponent))).T
@@ -79,35 +83,13 @@ plt.title("Best Response Function")
 plt.legend()
 plt.grid()
 plt.tight_layout()
-plt.savefig("best_response_function.png")
+plt.savefig(os.path.join(OUTPUT_DIR, "best_response_function.png"))
 plt.show()
 
 # Save the best response data
 # Normalise by the range
 best_response_params = (np.array(best_response_prices) - price_bounds[0]) / (price_bounds[1] - price_bounds[0])
-np.savetxt("best_response_params.txt", best_response_params)
-
-br_price, br_reward, prices_plot, rewards_plot = compute_best_response(
-    A, C, 1.4604315082785075, price_bounds, mu, a_0)
-
-print("Best response to 1.4604315082785075:", br_price, br_reward)
-
-# # Plot the reward function for both agents
-# plt.figure(figsize=(10, 6))
-# plt.plot(prices_plot, rewards_plot[:, 0], label='Extortion Agent Reward', color='blue')
-# plt.plot(prices_plot, rewards_plot[:, 1], label='Learning Agent Reward', color='orange')
-# plt.axvline(x=1.4604315082785075, color='red', linestyle='--', label='Extortion Agent Price')
-# plt.scatter(br_price[0], br_reward[1], color='green', zorder=5, label='Best Response')
-# plt.xlim(price_bounds)
-# plt.ylim(0, 0.3)
-# plt.xlabel("Learning Agent Price")
-# plt.ylabel("Reward")
-# plt.title("Reward Functions")
-# plt.legend()
-# plt.grid()
-# plt.tight_layout()
-# plt.show()
-
+np.savetxt(os.path.join(OUTPUT_DIR, "best_response_params.txt"), best_response_params)
 
 # Plot rewards for best response
 prices_all = np.vstack((prices, best_response_prices)).T
@@ -124,9 +106,3 @@ plt.legend()
 plt.grid()
 plt.tight_layout()
 plt.show()
-
-
-print(get_rewards(np.array([[1.4604315082785075, 1.4604315082785075]]), A, C, mu, a_0))
-print(get_rewards(np.array([[1.4614315082785075, 1.4604315082785075]]), A, C, mu, a_0))
-print(get_rewards(np.array([[1.4624315082785075, 1.4604315082785075]]), A, C, mu, a_0))
-print(get_rewards(np.array([[1.4634315082785075, 1.4604315082785075]]), A, C, mu, a_0))
