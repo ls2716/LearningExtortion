@@ -1,8 +1,8 @@
 # Learning to Extort Rational Opponents in Pricing Duopolies
 
 
-The code supports the research presented in Chapter 4 of the PhD thesis:  
-“Algorithmic Pricing in Competitive Markets”  
+The code supports the research presented in Chapter 5 of the PhD thesis:  
+“Algorithmic Pricing in Multi-agent, Competitive Markets”  
 by Lukasz Sliwinski, 2025, University of Edinburgh.
 
 ---
