@@ -141,7 +141,7 @@ ax.plot(
     +np.array([r_fmin] * len(prices_follower)),
     color="r",
 )
-ax.set_xlabel("Follower price $r^F$")
+ax.set_xlabel("Follower price $p^F$")
 ax.set_ylabel("Leader price $p^L$")
 ax.set_zlabel("Follower reward $r^F$")
 # ax.set_title('Follower Reward Surface with Constraint Line')

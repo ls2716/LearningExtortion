@@ -90,7 +90,7 @@ def main(training_config, evaluation_config, directory):
 
 if __name__ == "__main__":
 
-    directory = "tit_for_tat_up"
+    directory = "multi_all"
     evaluation_config_path = "evaluation_config.yaml"
     evaluation_config = load_config(evaluation_config_path)
 
